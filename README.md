@@ -52,8 +52,12 @@ Your final line of code to run should look similar to:
 ```powershell
 Edit-LADRWorkaround -folderpath 'C:\Users\UserA\SomeData' -decaysystem 'RbSr'
 ```
+If it does, press the return (enter) key to run the function.
+
+If a parameter is incorrectly set, PowerShell will notify you and ask you to set it. If it is incorrectly set again the function will terminate.
+
 Basic help is available in the function and can be accessed by:
 ```powershell
 help Edit-LADRWorkaround
 ```
-If you've followed these instructions you should be able to quickly process as many files as you need quickly and easily.
+If you've followed these instructions you should be able to quickly process as many files as you need with ease.
