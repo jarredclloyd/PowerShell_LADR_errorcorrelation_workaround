@@ -35,11 +35,15 @@ Import-Module 'SomeDirectory\LADRWorkaround.ps1'
 Save the profile file and close notepad. Now whenever you open the PowerShell terminal it will import the function by default so you can immediately call the function using Edit-LADRWorkaround and you do not need to explicitly run Import-Module each session.
 
 ## Using the function
-Operation of the function itself is simple, users need to specify a -folderpath and -decaysystem. To call the function the user needs to type Edit-LADRWorkaround in the PowerShell terminal followed by -folderpath 'string' and -decaysystem 'string' where -folderpath needs to be provided as a quote bound string of a path, and -decaysystem a quote bound string of value 'RbSr' or 'LuHf'
+Operation of the function itself is simple, users need to specify a -folderpath and -decaysystem. To call the function the user needs to type
+```powershell
+Edit-LADRWorkaround
+```
+in the PowerShell terminal followed by -folderpath 'string' and -decaysystem 'string' where -folderpath needs to be provided as a quote bound string of a path, and -decaysystem a quote bound string of value 'RbSr' or 'LuHf'.
+Your final line of code to run should look similar to:
 ```powershell
 Edit-LADRWorkaround -folderpath 'C:\Users\UserA\SomeData' -decaysystem 'RbSr'
 ```
-
 Basic help is available in the function and can be accessed by:
 ```powershell
 help Edit-LADRWorkaround
