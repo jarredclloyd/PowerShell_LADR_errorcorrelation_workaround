@@ -5,7 +5,7 @@ It is a cross-platform function that requires minimal user input via two defined
 
 ## Operational features of the function
 * Parameter validation prior to function run
-* Creates two new directories in the user defined *folderpath*: 'Originals' and a *decaysystem*_to_UPb (either "RbSr_to_UPb" or "LuHf_to_UPb" depending on the user defined *decaysystem*).
+* Creates two new directories in the user defined *folderpath*: 'Originals' and a *decaysystem*_to_UPb (either "RbSr_to_UPb" or "LuHf_to_UPb" depending on the user defined *decaysystem*)
 * Moves all original, unedited CSV files to the 'Originals' folder
 * Copies all CSV files in 'Originals' to *decaysystem* folder
 * Runs replace operation on CSV files in *decaysystem* folder to change Rb85 or Lu175 to U238, Sr87 or Hf176 to Pb207, Sr86 or Hf178 to Pb206, and U238 to U235 (to offset from U238 if measured)
