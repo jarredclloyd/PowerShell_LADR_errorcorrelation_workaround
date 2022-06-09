@@ -5,18 +5,18 @@ It is a cross-platform function that requires minimal user input via two defined
 
 ## Operational features of the function
 * Parameter validation prior to function run
-* Creates two new directories in the user defined *folderpath*: 'Originals' and a decaysystem_to_UPb (either "RbSr_to_UPb" or "LuHf_to_UPb" depending on the user defined *decaysystem*)
+* Creates two new directories in the user defined *folderpath*: 'Originals' and a *decaysystem*_to_UPb (either "RbSr_to_UPb" or "LuHf_to_UPb" depending on the user defined *decaysystem*).
 * Moves all original, unedited CSV files to the 'Originals' folder
-* Copies all CSV files in 'Originals' to decaysystem folder
-* Runs replace operation on CSV files in decaysystem folder to change Rb85 or Lu175 to U238, Sr87 or Hf176 to Pb207, Sr86 or Hf178 to Pb206, and U238 to U235 (to offset from U238 if measured)
+* Copies all CSV files in 'Originals' to *decaysystem* folder
+* Runs replace operation on CSV files in *decaysystem* folder to change Rb85 or Lu175 to U238, Sr87 or Hf176 to Pb207, Sr86 or Hf178 to Pb206, and U238 to U235 (to offset from U238 if measured)
 
 ## Adding the function to PowerShell
 Firstly, ensure the cross-platform PowerShell Core V7 or higher is installed. See [Get PowerShell](https://github.com/PowerShell/PowerShell#get-powershell) for detailed instructions. It can be installed via most OS package managers (e.g., winget, homebrew, apt).
 
-To obtain this PowerShell function, either clone the repository if you are familiar with Git or download the LADRWorkaround.ps1 file. Place the ps1 file into a stable location (I recommend using Git for this reason and for if I update the code, fix bugs etc.), just place it somewhere you aren't likely to accidentally delete it. GitHub desktop is an easy way to achieve a Git clone without having to use a CLI.
+To obtain this PowerShell function, either clone the repository if you are familiar with Git or download the LADRWorkaround.ps1 file. Place the ps1 file into a stable location (I recommend using Git for this reason and for if I update the code, fix bugs etc.), just place it somewhere you aren't likely to accidentally delete it. [GitHub desktop](https://desktop.github.com/) is an easy way to enter the world of Git without having to use a CLI.
 
 You can either Import-Module Path/LADRWorkaround.ps1 for each session that you need to use it, or to save some time in future I recommend setting up a PowerShell profile if you haven't already. 
-To import the function on a session basis, for each session first run (where SomeDirectory is the folderpath where the ps1 file is saved):
+To import the function on a session basis, for each session first run (where SomeDirectory is the path where the ps1 file is saved):
 ```powershell
 Import-Module 'SomeDirectory\LADRWorkaround.ps1'
 ```
@@ -39,7 +39,15 @@ Operation of the function itself is simple, users need to specify a -folderpath 
 ```powershell
 Edit-LADRWorkaround
 ```
-in the PowerShell terminal followed by -folderpath 'string' and -decaysystem 'string' where -folderpath needs to be provided as a quote bound string of a path, and -decaysystem a quote bound string of value 'RbSr' or 'LuHf'.
+in the PowerShell terminal followed by 
+```powershell
+-folderpath 'string' 
+```
+and 
+```powershell
+-decaysystem 'string'
+```
+where -folderpath needs to be provided as a quote bound string of a path, and -decaysystem a quote bound string of value 'RbSr' or 'LuHf'.
 Your final line of code to run should look similar to:
 ```powershell
 Edit-LADRWorkaround -folderpath 'C:\Users\UserA\SomeData' -decaysystem 'RbSr'
@@ -48,4 +56,4 @@ Basic help is available in the function and can be accessed by:
 ```powershell
 help Edit-LADRWorkaround
 ```
-If you've followed these instructions you should be able to quickly process hundreds to thousands of files quickly and easily.
+If you've followed these instructions you should be able to quickly process as many files as you need quickly and easily.
