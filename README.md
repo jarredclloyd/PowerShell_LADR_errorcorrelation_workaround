@@ -13,7 +13,7 @@ It is a cross-platform function that requires minimal user input via two defined
 ## Adding the function to PowerShell
 Firstly, ensure the cross-platform PowerShell Core V7 or higher is installed. See [Get PowerShell](https://github.com/PowerShell/PowerShell#get-powershell) for detailed instructions. It can be installed via most OS package managers (e.g., winget, homebrew, apt).
 
-To obtain this PowerShell function, either clone the repository if you are familiar with Git or download the LADRWorkaround.ps1 file. Place the ps1 file into a stable location (I recommend using Git for this reason and for if I update the code, fix bugs etc.), just place it somewhere you are not likely to accidentally delete it. [GitHub desktop](https://desktop.github.com/) is an easy way to enter the world of Git without having to use a CLI.
+To obtain this PowerShell function, either clone the repository if you are familiar with Git or download the LADRWorkaround.ps1 file (right click the .ps1 and Save Link As...) . Place the ps1 file into a stable location (I recommend using Git for this reason and for if I update the code, fix bugs etc.), just place it somewhere you are not likely to accidentally delete it. [GitHub desktop](https://desktop.github.com/) is an easy way to enter the world of Git without having to use a CLI.
 
 You can either Import-Module Path/LADRWorkaround.ps1 for each session that you need to use it, or to save some time in future I recommend setting up a PowerShell profile if you haven't already. 
 To import the function on a session basis, for each session first run (where SomeDirectory is the path where the ps1 file is saved):
