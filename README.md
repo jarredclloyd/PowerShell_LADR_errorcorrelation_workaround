@@ -47,10 +47,10 @@ and
 ```powershell
 -decaysystem 'string'
 ```
-where -folderpath needs to be provided as a quote bound string of a path, and -decaysystem a quote bound string of value 'RbSr' or 'LuHfNorm' or 'LuHfInv'.
+where -folderpath needs to be provided as a quote bound string of a path, and -decaysystem a quote bound string of value 'RbSrNorm', 'RbSrInv', 'LuHfNorm' or 'LuHfInv'.
 Your final line of code to run should look similar to:
 ```powershell
-Edit-LADRWorkaround -folderpath 'C:\Users\UserA\SomeData' -decaysystem 'RbSr'
+Edit-LADRWorkaround -folderpath 'C:\Users\UserA\SomeData' -decaysystem 'RbSrNorm'
 ```
 If it does, press the return (enter) key to run the function.
 
