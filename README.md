@@ -8,12 +8,12 @@ It is a cross-platform function that requires minimal user input via two defined
 * Creates two new directories in the user defined *folderpath*: 'Originals' and a *decaysystem*_to_UPb (either "RbSr_to_UPb" or "LuHf_norm_to_UPb" or "LuHf_inv_to_UPb"  depending on the user defined *decaysystem*)
 * Moves all original, unedited CSV files to the 'Originals' folder
 * Copies all CSV files in 'Originals' to *decaysystem* folder
-* Runs replace operation on CSV files in *decaysystem* folder to change Rb85 or Lu175 to U238, Sr87 or Hf176 to Pb207, Sr86 or Hf178 to Pb206, and U238 to U235 (to offset from U238 if measured)
+* Runs replace operation on CSV files in *decaysystem* folder to change Rb85 or Lu175 to U238, Sr87 or Hf176 to Pb207 (normal isochron) or Pb206 (inverse isochron), Sr86 or Hf178 to Pb206 (normal isochron) or Pb207 ((inverse isochron)), and U238 to U235 (to offset from U238 if measured)
 
 ## Adding the function to PowerShell
 Firstly, ensure the cross-platform PowerShell Core V7 or higher is installed. See [Get PowerShell](https://github.com/PowerShell/PowerShell#get-powershell) for detailed instructions. It can be installed via most OS package managers (e.g., winget, homebrew, apt).
 
-To obtain this PowerShell function, either clone the repository if you are familiar with Git or download the LADRWorkaround.ps1 file (right click the .ps1 and Save Link As...) . Place the ps1 file into a stable location (I recommend using Git for this reason and for if I update the code, fix bugs etc.), just place it somewhere you are not likely to accidentally delete it. [GitHub desktop](https://desktop.github.com/) is an easy way to enter the world of Git without having to use a CLI.
+To obtain this PowerShell function, either clone the repository if you are familiar with Git, **OR** create a new file in a program like Visual Studio Code, Notepad, TextEdit etc called LADRWorkaround.ps1 and copy the entire code from [LADRWorkaround.ps1](https://github.com/jarredclloyd/PowerShell_LADR_errorcorrelation_workaround/blob/main/LADRWorkaround.ps1) into the file then save it. Place the ps1 file into a stable location (I recommend using Git for this reason and for if I update the code, fix bugs etc.), just place it somewhere you are not likely to accidentally delete it. [GitHub desktop](https://desktop.github.com/) is an easy way to enter the world of Git without having to use a CLI.
 
 You can either Import-Module Path/LADRWorkaround.ps1 for each session that you need to use it, or to save some time in future I recommend setting up a PowerShell profile if you haven't already. 
 To import the function on a session basis, for each session first run (where SomeDirectory is the path where the ps1 file is saved):
