@@ -17,8 +17,8 @@ The user only needs to pass two variables $folderpath and $decaysystem for the f
 Given the two parameters, the function will create two new directories 'Originals' and one for the decay system (either 'RbSr_to_UPb' OR 'LuHf_to_UPb'). It will then move all the original CSV files into 'Originals' and subsequently copy them to the decay system folder.
 If the decay system folder already exists, the function will end without any alterations. If the folder does not exist it will proceed to make the required changes to the CSV files in the decay system folder. 
 For decay system:
-'RbSr', 'Rb85 -> 85' will be replaced by 'U238', 'Sr87 -> 103' will be replaced by 'Pb207, and 'Sr86 -> 102' will be replaced by 'Pb206'. Additonally 'U238 ->....' will be replaced by 'U235'.
-'LuHf', 'Lu175 -> 175' will be replaced by 'U238', 'Hf176 -> 258' will be replaced by 'Pb207, and 'Hf178 -> 260' will be replaced by 'Pb206'. Additonally 'U238 ->....' will be replaced by 'U235'.
+'RbSr', 'Rb85 -> 85' will be replaced by 'U238', 'Sr87 -> 103' will be replaced by 'Pb207, and 'Sr86 -> 102' will be replaced by 'Pb206'. Additonally 'U238 ->....' will be replaced by 'U234'.
+'LuHf', 'Lu175 -> 175' will be replaced by 'U238', 'Hf176 -> 258' will be replaced by 'Pb207, and 'Hf178 -> 260' will be replaced by 'Pb206'. Additonally 'U238 ->....' will be replaced by 'U234'.
 
 .PARAMETER decaysystem
 This parameter is used to define the geochronometric decay system the data is used for to correctly adjust headers. Set to a value of 'RbSr' or 'LuHf' (e.g., -decaysystem 'RbSr')
@@ -64,7 +64,7 @@ function Edit-LADRWorkaround {
                 Copy-Item -Path $originalsdircsv -Destination $RbSrtoUPbDir
                     Get-ChildItem -Path $RbSrtoUPbDir| ForEach-Object -ThrottleLimit 16 -Parallel {
                         $outfile = $_.FullName 
-                        [io.file]::ReadAllText($_.FullName) -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb207' -Replace 'Sr86 -> 102', 'Pb206' -Replace 'U238 ->....', 'U235' |
+                        [io.file]::ReadAllText($_.FullName) -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb207' -Replace 'Sr86 -> 102', 'Pb206' -Replace 'U238 ->....', 'U234' |
                         Out-File $outfile
                     }
                     Write-Host 'Task completed.'
@@ -78,7 +78,7 @@ function Edit-LADRWorkaround {
                     Copy-Item -Path $originalsdircsv -Destination $LuHfNormtoUPbDir
                     Get-ChildItem -Path $LuHfNormtoUPbDir | ForEach-Object -ThrottleLimit 16 -Parallel {
                         $outfile = $_.FullName 
-                                [io.file]::ReadAllText($_.FullName) -Replace 'Lu175 -> 175', 'U238' -Replace 'Hf176 -> 258', 'Pb207' -Replace 'Hf178 -> 260', 'Pb206' -Replace 'U238 ->....', 'U235' |
+                                [io.file]::ReadAllText($_.FullName) -Replace 'Lu175 -> 175', 'U238' -Replace 'Hf176 -> 258', 'Pb207' -Replace 'Hf178 -> 260', 'Pb206' -Replace 'U238 ->....', 'U234' |
                         Out-File $outfile
                     }
                     Write-Host 'Task completed.'
@@ -93,7 +93,7 @@ function Edit-LADRWorkaround {
                     Copy-Item -Path $originalsdircsv -Destination $LuHfInvtoUPbDir
                     Get-ChildItem -Path $LuHfInvtoUPbDir | ForEach-Object -ThrottleLimit 16 -Parallel {
                         $outfile = $_.FullName 
-                                    [io.file]::ReadAllText($_.FullName) -Replace 'Lu175 -> 175', 'U238' -Replace 'Hf176 -> 258', 'Pb206' -Replace 'Hf178 -> 260', 'Pb207' -Replace 'U238 ->....', 'U235' |
+                                    [io.file]::ReadAllText($_.FullName) -Replace 'Lu175 -> 175', 'U238' -Replace 'Hf176 -> 258', 'Pb206' -Replace 'Hf178 -> 260', 'Pb207' -Replace 'U238 ->....', 'U234' |
                             Out-File $outfile
                         }
                         Write-Host 'Task completed.'
