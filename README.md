@@ -24,15 +24,15 @@ To 'permanently' load the function so you do not have to run the previous code e
 ```powershell
 if (!(Test-Path -Path $PROFILE )) { New-Item -Type File -Path $PROFILE -Force }
 ```
-Then open the profile in notepad using:
+Then open the profile in a text editor using (below example is for MS Windows, replace notepad with the appropriate program on Linux & Mac):
 ```powershell
 notepad $PROFILE
 ```
-Add the filepath to the LADRWorkaround.ps1 to the profile file that is open in notepad and prefix it with Import-Module:
+Add the filepath to the LADRWorkaround.ps1 to the profile file that is open in notepad and prefix it with Import-Module (change the \ to / for Linux & Mac):
 ```powershell
 Import-Module 'SomeDirectory\LADRWorkaround.ps1'
 ```
-Save the profile file and close notepad. Now whenever you open the PowerShell terminal it will import the function by default so you can immediately call the function using Edit-LADRWorkaround and you do not need to explicitly run Import-Module each session.
+Save the profile file and close your text editor. Now whenever you open the PowerShell terminal it will import the function by default so you can immediately call the function using Edit-LADRWorkaround and you do not need to explicitly run Import-Module each session.
 
 ## Using the function
 Operation of the function itself is simple, users need to specify a -folderpath and -decaysystem. To call the function the user needs to type
