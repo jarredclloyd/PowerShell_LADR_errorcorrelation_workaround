@@ -29,11 +29,12 @@ Quickly batch edit specific headers in Agilent 8800x mass spectrometer output fi
 .DESCRIPTION
 This function allows the user to quickly batch alter specific headers in Agilent 8800x mass spectrometer output CSV files as a workaround to calculate error correlations in LADR for RbSr and LuHf geochronometry. 
 The user only needs to pass two variables $folderpath and $decaysystem for the function to operate. If one of these parameters is not set correctly or missing the function will throw an error.
-Given the two parameters, the function will create two new directories 'Originals' and one for the decay system (either 'RbSr_norm_to_UPb' OR 'LuHf_to_UPb'). It will then move all the original CSV files into 'Originals' and subsequently copy them to the decay system folder.
+Given the two parameters, the function will create two new directories 'Originals' and one for the decay system (e.g., 'RbSr_norm_to_UPb' OR 'LuHf_to_UPb'). It will then move all the original CSV files into 'Originals' and subsequently copy them to the decay system folder.
 If the decay system folder already exists, the function will end without any alterations. If the folder does not exist it will proceed to make the required changes to the CSV files in the decay system folder. 
 For decay system:
-'RbSr', 'Rb85 -> 85' will be replaced by 'U238', 'Sr87 -> 103' will be replaced by 'Pb207, and 'Sr86 -> 102' will be replaced by 'Pb206'. Additonally 'U238 ->....' will be replaced by 'U234'.
-'LuHf', 'Lu175 -> 175' will be replaced by 'U238', 'Hf176 -> 258' will be replaced by 'Pb207, and 'Hf178 -> 260' will be replaced by 'Pb206'. Additonally 'U238 ->....' will be replaced by 'U234'.
+'RbSrNorm', 'RbSrInv': 'Rb85 -> 85' will be replaced by 'U238', 'Sr87 -> 103' will be replaced by 'Pb207', and 'Sr86 -> 102' will be replaced by 'Pb206'. The 'inv' version will switch Sr87 and Sr86 transforms. Additonally 'U238 ->....' will be replaced by 'U234'.
+'RbSr88Norm', 'RbSr88Inv': Same as RbSr but Sr88 replaces Sr86 (used for low Sr86 Sr88 samples)
+'LuHfNorm', 'LuHfInv': 'Lu175 -> 175' will be replaced by 'U238', 'Hf176 -> 258' will be replaced by 'Pb207, and 'Hf178 -> 260' will be replaced by 'Pb206'. The 'inv' version will switch Hf176 and Hf178 transforms. Additonally 'U238 ->....' will be replaced by 'U234'.
 
 .PARAMETER decaysystem
 This parameter is used to define the geochronometric decay system the data is used for to correctly adjust headers. Set to a value of 'RbSr' or 'LuHf' (e.g., -decaysystem 'RbSr')
@@ -48,7 +49,7 @@ PS> Edit-LADRWorkaround -path 'C:\Users\UserA\somedata' -decaysystem 'RbSr'
 function Edit-LADRWorkaround {
     param (
         [Parameter(Mandatory)]
-        [ValidateSet('RbSrNorm', 'RbSrInv' , 'LuHfNorm', 'LuHfInv')]
+        [ValidateSet('RbSrNorm', 'RbSrInv' , 'RbSr88Norm', 'RbSr88Inv' , 'LuHfNorm', 'LuHfInv')]
         [string]$decaysystem
     ,
         [Parameter(Mandatory)]
@@ -60,6 +61,8 @@ function Edit-LADRWorkaround {
     $LuHfInvtoUPbDir = Join-Path -Path $folderpath -ChildPath 'LuHf_inv_to_UPb'
     $RbSrNormtoUPbDir= Join-Path -Path $folderpath -ChildPath 'RbSr_norm_to_UPb'
     $RbSrInvtoUPbDir = Join-Path -Path $folderpath -ChildPath 'RbSr_inv_to_UPb'
+    $RbSr88NormtoUPbDir = Join-Path -Path $folderpath -ChildPath 'RbSr88_norm_to_UPb'
+    $RbSr88InvtoUPbDir = Join-Path -Path $folderpath -ChildPath 'RbSr88_inv_to_UPb'
     $originalsdir = Join-Path -Path $folderpath -ChildPath 'Originals'
     $folderpathcsv = Join-Path -Path $folderpath -ChildPath '*.csv'
     $originalsdircsv = Join-Path -Path $originalsdir -ChildPath '*.csv'
@@ -96,6 +99,36 @@ function Edit-LADRWorkaround {
                     Get-ChildItem -Path $RbSrInvtoUPbDir | ForEach-Object -ThrottleLimit 16 -Parallel {
                         $outfile = $_.FullName 
                         [io.file]::ReadAllText($_.FullName) -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb206' -Replace 'Sr86 -> 102', 'Pb207' -Replace 'U238 ->....', 'U234' |
+                            Out-File $outfile
+                        }
+                        Write-Host 'Task completed.'
+                    }
+                }
+            'RbSr88Norm' {
+                if (Test-Path $RbSr88NormtoUPbDir) {
+                    Write-Host 'Edited files folder already exists. Operation terminated.' 
+                } 
+                else { 
+                    New-Item $RbSr88NormtoUPbDir -ItemType Directory
+                    Copy-Item -Path $originalsdircsv -Destination $RbSr88NormtoUPbDir
+                    Get-ChildItem -Path $RbSr88NormtoUPbDir | ForEach-Object -ThrottleLimit 16 -Parallel {
+                        $outfile = $_.FullName 
+                        [io.file]::ReadAllText($_.FullName) -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb207' -Replace 'Sr88 -> 104', 'Pb206' -Replace 'U238 ->....', 'U234' |
+                            Out-File $outfile
+                        }
+                        Write-Host 'Task completed.'
+                    }
+                }
+            'RbSr88Inv' {
+                if (Test-Path $RbSr88InvtoUPbDir) {
+                    Write-Host 'Edited files folder already exists. Operation terminated.' 
+                } 
+                else { 
+                    New-Item $RbSr88InvtoUPbDir -ItemType Directory
+                    Copy-Item -Path $originalsdircsv -Destination $RbSr88InvtoUPbDir
+                    Get-ChildItem -Path $RbSr88InvtoUPbDir | ForEach-Object -ThrottleLimit 16 -Parallel {
+                        $outfile = $_.FullName 
+                        [io.file]::ReadAllText($_.FullName) -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb206' -Replace 'Sr88 -> 104', 'Pb207' -Replace 'U238 ->....', 'U234' |
                             Out-File $outfile
                         }
                         Write-Host 'Task completed.'
