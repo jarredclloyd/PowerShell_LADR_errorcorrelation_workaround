@@ -5,10 +5,10 @@ It is a cross-platform function that requires minimal user input via two defined
 
 ## Operational features of the function
 * Parameter validation prior to function run
-* Creates two new directories in the user defined *folderpath*: 'Originals' and a *decaysystem*_to_UPb (either "RbSr_norm_to_UPb", "RbSr_inv_to_UPb", "LuHf_norm_to_UPb" or "LuHf_inv_to_UPb" depending on the user defined *decaysystem*)
+* Creates two new directories in the user defined *folderpath*: 'Originals' and a *decaysystem*_to_UPb (either "RbSr_norm_to_UPb", "RbSr_inv_to_UPb", "RbSr88_norm_to_UPb", "RbSr88_inv_to_UPb", "LuHf_norm_to_UPb" or "LuHf_inv_to_UPb" depending on the user defined *decaysystem*)
 * Moves all original, unedited CSV files to the 'Originals' folder
 * Copies all CSV files in 'Originals' to *decaysystem* folder
-* Runs replace operation on CSV files in *decaysystem* folder to change Rb85 or Lu175 to U238, Sr87 or Hf176 to Pb207 (normal isochron) or Pb206 (inverse isochron), Sr86 or Hf178 to Pb206 (normal isochron) or Pb207 ((inverse isochron)), and U238 to U234 (to offset from U238 if measured)
+* Runs replace operation on CSV files in *decaysystem* folder to change Rb85 or Lu175 to U238, Sr87 or Sr88 or Hf176 to Pb207 (normal isochron) or Pb206 (inverse isochron), Sr86 or Sr88 or Hf178 to Pb206 (normal isochron) or Pb207 (inverse isochron), and U238 to U234 (to offset from U238 if measured)
 
 ## Adding the function to PowerShell
 Firstly, ensure the cross-platform PowerShell Core V7 or higher is installed. See [Get PowerShell](https://github.com/PowerShell/PowerShell#get-powershell) for detailed instructions. It can be installed via most OS package managers (e.g., winget, homebrew, apt).
@@ -47,7 +47,7 @@ and
 ```powershell
 -decaysystem 'string'
 ```
-where -folderpath needs to be provided as a quote bound string of a path, and -decaysystem a quote bound string of value 'RbSrNorm', 'RbSrInv', 'LuHfNorm' or 'LuHfInv'.
+where -folderpath needs to be provided as a quote bound string of a path, and -decaysystem a quote bound string of value 'RbSrNorm', 'RbSrInv', 'RbSr88Norm', 'RbSr88Inv', 'LuHfNorm' or 'LuHfInv'.
 Your final line of code to run should look similar to:
 ```powershell
 Edit-LADRWorkaround -folderpath 'C:\Users\UserA\SomeData' -decaysystem 'RbSrNorm'
