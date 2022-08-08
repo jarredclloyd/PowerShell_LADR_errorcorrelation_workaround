@@ -8,11 +8,11 @@ It is a cross-platform function that requires minimal user input via two defined
 * Creates two new directories in the user defined *folderpath*: 'Originals' and a *decaysystem*_to_UPb (either "RbSr_norm_to_UPb", "RbSr_inv_to_UPb", "RbSr88_norm_to_UPb", "RbSr88_inv_to_UPb", "LuHf_norm_to_UPb" or "LuHf_inv_to_UPb" depending on the user defined *decaysystem*)
 * Moves all original, unedited CSV files to the 'Originals' folder
 * Copies all CSV files in 'Originals' to *decaysystem* folder
-Runs replace operation on CSV files in *decaysystem* folder to change:
-* Rb85 or Lu175 to U238
-* Sr87 or Sr88 or Hf176 to Pb207 (normal isochron) or Pb206 (inverse isochron)
-* Sr86 or Sr88 or Hf178 to Pb206 (normal isochron) or Pb207 (inverse isochron)
-* U238, U235, Pb207, & Pb206 to U234, U232, Pb205, pb202 (to offset from these isotopes if measured).
+* Runs replace operation on CSV files in *decaysystem* folder to change:
+> * Rb85 or Lu175 to U238
+> * Sr87 or Sr88 or Hf176 to Pb207 (normal isochron) or Pb206 (inverse isochron)
+> * Sr86 or Sr88 or Hf178 to Pb206 (normal isochron) or Pb207 (inverse isochron)
+> * U238, U235, Pb207, & Pb206 to U234, U232, Pb205, & Pb202 (to offset from these isotopes if measured)
 
 ## Adding the function to PowerShell
 Firstly, ensure the cross-platform PowerShell Core V7 or higher is installed. See [Get PowerShell](https://github.com/PowerShell/PowerShell#get-powershell) for detailed instructions. It can be installed via most OS package managers (e.g., winget, homebrew, apt).
