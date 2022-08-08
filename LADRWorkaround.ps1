@@ -75,15 +75,19 @@ function Edit-LADRWorkaround {
         Move-Item -Path $folderpathcsv -Destination $originalsdir
     }
     switch ($decaysystem) {
-            'RbSrNorm' { if (Test-Path $RbSrNormtoUPbDir) {
-                Write-Host 'Edited files folder already exists. Operation terminated.' 
+            'RbSrNorm' {
+                if (Test-Path $RbSrNormtoUPbDir) {
+                    Write-Host 'Edited files folder already exists. Operation terminated.' 
             } 
                 else { 
-                New-Item $RbSrNormtoUPbDir -ItemType Directory
-                Copy-Item -Path $originalsdircsv -Destination $RbSrNormtoUPbDir
+                    New-Item $RbSrNormtoUPbDir -ItemType Directory
+                    Copy-Item -Path $originalsdircsv -Destination $RbSrNormtoUPbDir
                     Get-ChildItem -Path $RbSrNormtoUPbDir| ForEach-Object -ThrottleLimit 16 -Parallel {
                         $outfile = $_.FullName 
-                        [io.file]::ReadAllText($_.FullName) -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb207' -Replace 'Sr86 -> 102', 'Pb206' -Replace 'U238 ->....', 'U234' |
+                        [io.file]::ReadAllText($_.FullName) `
+                        -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb207' -Replace 'Sr86 -> 102', 'Pb206' `
+                        -Replace 'U238 ->....', 'U234' -Replace 'U235 ->....', 'U232' `
+                        -Replace 'Pb206 ->....', 'Pb202' -Replace 'Pb207 ->....', 'Pb205'|
                         Out-File $outfile
                     }
                     Write-Host 'Task completed.'
@@ -98,12 +102,15 @@ function Edit-LADRWorkaround {
                     Copy-Item -Path $originalsdircsv -Destination $RbSrInvtoUPbDir
                     Get-ChildItem -Path $RbSrInvtoUPbDir | ForEach-Object -ThrottleLimit 16 -Parallel {
                         $outfile = $_.FullName 
-                        [io.file]::ReadAllText($_.FullName) -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb206' -Replace 'Sr86 -> 102', 'Pb207' -Replace 'U238 ->....', 'U234' |
-                            Out-File $outfile
-                        }
-                        Write-Host 'Task completed.'
+                        [io.file]::ReadAllText($_.FullName) `
+                        -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb206' -Replace 'Sr86 -> 102', 'Pb207' `
+                        -Replace 'U238 ->....', 'U234' -Replace 'U235 ->....', 'U232' `
+                        -Replace 'Pb206 ->....', 'Pb202' -Replace 'Pb207 ->....', 'Pb205' |
+                        Out-File $outfile
                     }
+                    Write-Host 'Task completed.'
                 }
+            }
             'RbSr88Norm' {
                 if (Test-Path $RbSr88NormtoUPbDir) {
                     Write-Host 'Edited files folder already exists. Operation terminated.' 
@@ -113,12 +120,15 @@ function Edit-LADRWorkaround {
                     Copy-Item -Path $originalsdircsv -Destination $RbSr88NormtoUPbDir
                     Get-ChildItem -Path $RbSr88NormtoUPbDir | ForEach-Object -ThrottleLimit 16 -Parallel {
                         $outfile = $_.FullName 
-                        [io.file]::ReadAllText($_.FullName) -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb207' -Replace 'Sr88 -> 104', 'Pb206' -Replace 'U238 ->....', 'U234' |
-                            Out-File $outfile
+                        [io.file]::ReadAllText($_.FullName) `
+                        -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb207' -Replace 'Sr88 -> 104', 'Pb206' `
+                        -Replace 'U238 ->....', 'U234' -Replace 'U235 ->....', 'U232' `
+                        -Replace 'Pb206 ->....', 'Pb202' -Replace 'Pb207 ->....', 'Pb205' |
+                        Out-File $outfile
                         }
-                        Write-Host 'Task completed.'
-                    }
+                    Write-Host 'Task completed.'
                 }
+            }
             'RbSr88Inv' {
                 if (Test-Path $RbSr88InvtoUPbDir) {
                     Write-Host 'Edited files folder already exists. Operation terminated.' 
@@ -128,12 +138,15 @@ function Edit-LADRWorkaround {
                     Copy-Item -Path $originalsdircsv -Destination $RbSr88InvtoUPbDir
                     Get-ChildItem -Path $RbSr88InvtoUPbDir | ForEach-Object -ThrottleLimit 16 -Parallel {
                         $outfile = $_.FullName 
-                        [io.file]::ReadAllText($_.FullName) -Replace 'Rb85 -> 85', 'U238' -Replace 'Sr87 -> 103', 'Pb206' -Replace 'Sr88 -> 104', 'Pb207' -Replace 'U238 ->....', 'U234' |
-                            Out-File $outfile
+                        [io.file]::ReadAllText($_.FullName) `
+                        -Replace 'Rb85 -> 85', 'U238'` -Replace 'Sr87 -> 103', 'Pb206' -Replace 'Sr88 -> 104', 'Pb207' `
+                        -Replace 'U238 ->....', 'U234' -Replace 'U235 ->....', 'U232' `
+                        -Replace 'Pb206 ->....', 'Pb202' -Replace 'Pb207 ->....', 'Pb205' |
+                        Out-File $outfile
                         }
-                        Write-Host 'Task completed.'
-                    }
+                    Write-Host 'Task completed.'
                 }
+            }
             'LuHfNorm' { if (Test-Path $LuHfNormtoUPbDir) {
                     Write-Host 'Edited files folder already exists. Operation terminated.' 
             } 
@@ -142,7 +155,10 @@ function Edit-LADRWorkaround {
                     Copy-Item -Path $originalsdircsv -Destination $LuHfNormtoUPbDir
                     Get-ChildItem -Path $LuHfNormtoUPbDir | ForEach-Object -ThrottleLimit 16 -Parallel {
                         $outfile = $_.FullName 
-                                [io.file]::ReadAllText($_.FullName) -Replace 'Lu175 -> 175', 'U238' -Replace 'Hf176 -> 258', 'Pb207' -Replace 'Hf178 -> 260', 'Pb206' -Replace 'U238 ->....', 'U234' |
+                        [io.file]::ReadAllText($_.FullName) `
+                        -Replace 'Lu175 -> 175', 'U238' -Replace 'Hf176 -> 258', 'Pb207' -Replace 'Hf178 -> 260', 'Pb206'`
+                        -Replace 'U238 ->....', 'U234' -Replace 'U235 ->....', 'U232' `
+                        -Replace 'Pb206 ->....', 'Pb202' -Replace 'Pb207 ->....', 'Pb205' |
                         Out-File $outfile
                     }
                     Write-Host 'Task completed.'
@@ -157,12 +173,15 @@ function Edit-LADRWorkaround {
                     Copy-Item -Path $originalsdircsv -Destination $LuHfInvtoUPbDir
                     Get-ChildItem -Path $LuHfInvtoUPbDir | ForEach-Object -ThrottleLimit 16 -Parallel {
                         $outfile = $_.FullName 
-                                    [io.file]::ReadAllText($_.FullName) -Replace 'Lu175 -> 175', 'U238' -Replace 'Hf176 -> 258', 'Pb206' -Replace 'Hf178 -> 260', 'Pb207' -Replace 'U238 ->....', 'U234' |
-                            Out-File $outfile
+                        [io.file]::ReadAllText($_.FullName) `
+                        -Replace 'Lu175 -> 175', 'U238' -Replace 'Hf176 -> 258', 'Pb206' -Replace 'Hf178 -> 260', 'Pb207'`
+                        -Replace 'U238 ->....', 'U234' -Replace 'U235 ->....', 'U232' `
+                        -Replace 'Pb206 ->....', 'Pb202' -Replace 'Pb207 ->....', 'Pb205' |
+                        Out-File $outfile
                         }
-                        Write-Host 'Task completed.'
-                    }
+                    Write-Host 'Task completed.'
                 }
+            }
         }
     }
 }
