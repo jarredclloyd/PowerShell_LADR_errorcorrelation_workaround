@@ -10,7 +10,7 @@ It is a cross-platform function that requires minimal user input via two defined
 * Copies all CSV files in 'Originals' to *decaysystem* folder
 * Runs replace operation on CSV files in *decaysystem* folder to change:
 > * Rb85 or Lu175 to U238
-> * Sr87 or Sr88 or Hf176 to Pb207 (normal isochron) or Pb206 (inverse isochron)
+> * Sr87 or Hf176 to Pb207 (normal isochron) or Pb206 (inverse isochron)
 > * Sr86 or Sr88 or Hf178 to Pb206 (normal isochron) or Pb207 (inverse isochron)
 > * U238, U235, Pb207, & Pb206 to U234, U232, Pb205, & Pb202 (to offset from these isotopes if measured)
 
