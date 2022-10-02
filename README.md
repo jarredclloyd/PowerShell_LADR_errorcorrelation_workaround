@@ -1,5 +1,5 @@
 # PowerShell LADR error correlation workaround
-This [PowerShell](https://github.com/PowerShell/PowerShell/) function is made to assist the user in changing specific mass header values in Agilent 8800X QQQ mass spectrometer output CSV files for the purpose of enabling ratio error correlation calculation and output from LADR for non U-Pb geochronometry. The edited data files should ONLY be used to generate error correlations.
+This [PowerShell](https://github.com/PowerShell/PowerShell/) function is made to assist the user in changing specific mass header values in Agilent 8900X QQQ mass spectrometer output CSV files for the purpose of enabling ratio error correlation calculation and output from LADR for non U-Pb geochronometry. The edited data files should ONLY be used to generate error correlations.
 
 It is a cross-platform function that requires minimal user input via two defined parameters *folderpath* and *decaysystem*. The function has no restrictions on the number of files, and performs the replace operations in parallel to reduce runtime.
 
