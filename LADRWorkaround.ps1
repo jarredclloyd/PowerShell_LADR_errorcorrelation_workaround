@@ -1,6 +1,6 @@
 <#
 FILENAME: LADRWorkaround.ps1
-VERSION 1.0.0
+VERSION 1.0.2
 POWERSHELL FUNCTION NAME: Edit-LADRWorkaround
 AUTHOR: Jarred Lloyd
 DATE: 2022-06-09
@@ -43,7 +43,7 @@ This parameter is used to define the geochronometric decay system the data is us
 This parameter is used to define the host folder path the data to be copied and edited is stored in. Set to a path string (e.g., -folderpath 'C:\Users\UserA\' or 'C:/Users/UserA')
 
 .EXAMPLE
-PS> Edit-LADRWorkaround -path 'C:\Users\UserA\somedata' -decaysystem 'RbSr'
+PS> Edit-LADRWorkaround -folderpath 'C:\Users\UserA\somedata' -decaysystem 'RbSr'
 #>
 
 function Edit-LADRWorkaround {
